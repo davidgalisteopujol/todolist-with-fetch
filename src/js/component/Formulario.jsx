@@ -15,9 +15,14 @@ const Formulario = () => {
 
 
 	const añadirTarea = () =>{
-        enviarTarea()
-		setTarea([...tarea, { label: inputCreado, done: false }])
-        setInputCreado("")
+        if(inputCreado.length==0) {
+            alert("Escribe una tarea para añadir")
+        }else {
+            enviarTarea()
+            setTarea([...tarea, { label: inputCreado, done: false }])
+            setInputCreado("")
+        }
+        
 	}
 
 
@@ -67,7 +72,7 @@ const Formulario = () => {
     return (
         
         <div>
-            <input className="container" name="label" style={{width:"290px"}} type="text" value={inputCreado} onChange={(e)=>setInputCreado((e.target.value))}  /><button onClick={añadirTarea} >Enviar</button>
+            <input  name="label" type="text" value={inputCreado} onChange={(e)=>setInputCreado((e.target.value))}/><button onClick={añadirTarea} >Añadir</button>
                 {
 				tarea.map((tarea,index) => <Lista borrarTarea={borrarTarea} tarea={tarea.label} key={index} index = {index}/> )
 				} 
