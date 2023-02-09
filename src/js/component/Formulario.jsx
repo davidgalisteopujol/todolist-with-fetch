@@ -9,14 +9,11 @@ const Formulario = () => {
     const [inputCreado, setInputCreado] = useState("");
 	const [tarea, setTarea] = useState([]);
 
-
     useEffect(() => {
         getList().then(body => setTarea(body))
     },[])
 
-    
     useEffect(()=>{
-   
         fetch('https://assets.breatheco.de/apis/fake/todos/user/david', {
             method: "PUT",
             body: JSON.stringify(tarea),
@@ -36,7 +33,6 @@ const Formulario = () => {
 
     },[tarea])
     
-
 	const añadirTarea = (e) => {setInputCreado({[e.target.name]: e.target.value, done:false});}
 
 	const crearArray = (e) =>{
@@ -47,17 +43,10 @@ const Formulario = () => {
 		}
 	}
 
-	// const borrarTarea= (index) => {  asi estaba el original
-	// 	const borradoArray= [...tarea]
-	// 	borradoArray.splice(index,1)
-	// 	setTarea(borradoArray)
-	// }
-
-
     const borrarTarea= (index) => { 
         const borradoArray= [...tarea]
         borradoArray.splice(index,1)
-
+        setTarea(borradoArray)
             if(borradoArray.length===0) {
                 borradoArray.splice(0,borradoArray.length)
                 console.log("no quea nada ")
@@ -69,23 +58,14 @@ const Formulario = () => {
             } 
     }
 
-
-    
-
     return (
         
         <div>
-
             <input className="container" name="label" style={{width:"290px"}} type="text" onChange={añadirTarea}  onKeyPress={crearArray} />
-
-            <div>
                 {
-				tarea.map((tarea,index) => <Lista borrarTarea={borrarTarea} tarea={tarea.label} key={index}/> )
-				}
-            </div>
-
+				tarea.map((tarea,index) => <Lista borrarTarea={borrarTarea} tarea={tarea.label} key={index} index = {index}/> )
+				} 
         </div>
-
     )
 }
 

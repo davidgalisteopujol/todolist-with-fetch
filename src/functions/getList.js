@@ -33,12 +33,9 @@ export const getList = async () => {
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
-            
-            
         }
         
-        
-    } catch (error) {
+    }catch (error) {
         console.error("GET error: ", error);
     }
 }
